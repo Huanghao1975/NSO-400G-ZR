@@ -1,0 +1,158 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0"
+                 servicepoint="oc-400g-zr-servicepoint">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <?set N4 = {number(substring-before(device-1-optical-port,'/'))}?>
+    <?set N4_AFTER = {(substring-after(device-1-optical-port,'/'))}?>
+    <?set N3 = {number(substring-before($N4_AFTER,'/'))}?>
+    <?set N3_AFTER = {(substring-after($N4_AFTER,'/'))}?>
+    <?set N2 = {number(substring-before($N3_AFTER,'/'))}?>
+    <?set N2_AFTER = {(substring-after($N3_AFTER,'/'))}?>
+    <?set N1 = {number($N2_AFTER)}?>
+    <?set LOGICAL_CHANNELS_INDEX = {($N3*2000+$N2*200+$N1)}?>
+    <?set OPTICAL_CHANNELS_INDEX = {($N3*2000+$N2*200+$N1+40000)}?>
+    <?set OPTICAL_CHANNELS_PORT = 0/{$N3}-OpticalChannel{device-1-optical-port}?>
+    <device>
+      <name>{/device-1}</name>
+      <config>
+        <terminal-device xmlns="http://openconfig.net/yang/terminal-device">
+          <logical-channels>
+            <channel>
+              <index>{$LOGICAL_CHANNELS_INDEX}</index>
+              <config>
+                <index>{$LOGICAL_CHANNELS_INDEX}</index>
+                <admin-state>ENABLED</admin-state>
+                <rate-class xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:TRIB_RATE_400G</rate-class>
+                <logical-channel-type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:PROT_ETHERNET</logical-channel-type>
+              </config>
+              <logical-channel-assignments>
+                <assignment>
+                  <index>1</index>
+                  <config>
+                    <index>1</index>
+                    <assignment-type>LOGICAL_CHANNEL</assignment-type>
+                    <logical-channel>{$OPTICAL_CHANNELS_INDEX}</logical-channel>
+                    <allocation>400.0</allocation>
+                  </config>
+                </assignment>
+              </logical-channel-assignments>
+            </channel>
+            <channel>
+              <index>{$OPTICAL_CHANNELS_INDEX}</index>
+              <config>
+                <index>{$OPTICAL_CHANNELS_INDEX}</index>
+                <admin-state>ENABLED</admin-state>
+                <logical-channel-type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:PROT_OTN</logical-channel-type>
+              </config>
+              <logical-channel-assignments>
+                <assignment>
+                  <index>1</index>
+                  <config>
+                    <index>1</index>
+                    <assignment-type>OPTICAL_CHANNEL</assignment-type>
+                    <optical-channel>{$OPTICAL_CHANNELS_PORT}</optical-channel>
+                    <allocation>400.0</allocation>
+                  </config>
+                </assignment>
+              </logical-channel-assignments>
+            </channel>
+          </logical-channels>
+        </terminal-device>
+        <components xmlns="http://openconfig.net/yang/platform">
+          <component>
+            <name>{$OPTICAL_CHANNELS_PORT}</name>
+            <config>
+              <name>{$OPTICAL_CHANNELS_PORT}</name>
+            </config>
+            <optical-channel xmlns="http://openconfig.net/yang/terminal-device">
+              <config>
+                <frequency>{number(device-1-port-frequency)*1000000}</frequency>
+                <?if {device-2-port-tx-power}?>
+                  <target-output-power>{number(device-1-port-tx-power)*100}</target-output-power><operational-mode>5003</operational-mode>
+                <?end?>
+                <operational-mode>5003</operational-mode>
+              </config>
+            </optical-channel>
+          </component>
+        </components>
+      </config>
+    </device>
+  </devices>
+
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <?set N4 = {number(substring-before(device-2-optical-port,'/'))}?>
+    <?set N4_AFTER = {(substring-after(device-2-optical-port,'/'))}?>
+    <?set N3 = {number(substring-before($N4_AFTER,'/'))}?>
+    <?set N3_AFTER = {(substring-after($N4_AFTER,'/'))}?>
+    <?set N2 = {number(substring-before($N3_AFTER,'/'))}?>
+    <?set N2_AFTER = {(substring-after($N3_AFTER,'/'))}?>
+    <?set N1 = {number($N2_AFTER)}?>
+    <?set LOGICAL_CHANNELS_INDEX = {($N3*2000+$N2*200+$N1)}?>
+    <?set OPTICAL_CHANNELS_INDEX = {($N3*2000+$N2*200+$N1+40000)}?>
+    <?set OPTICAL_CHANNELS_PORT = 0/{$N3}-OpticalChannel{device-2-optical-port}?>
+    <device>
+      <name>{/device-2}</name>
+      <config>
+        <terminal-device xmlns="http://openconfig.net/yang/terminal-device">
+          <logical-channels>
+            <channel>
+              <index>{$LOGICAL_CHANNELS_INDEX}</index>
+              <config>
+                <index>{$LOGICAL_CHANNELS_INDEX}</index>
+                <admin-state>ENABLED</admin-state>
+                <rate-class xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:TRIB_RATE_400G</rate-class>
+                <logical-channel-type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:PROT_ETHERNET</logical-channel-type>
+              </config>
+              <logical-channel-assignments>
+                <assignment>
+                  <index>1</index>
+                  <config>
+                    <index>1</index>
+                    <assignment-type>LOGICAL_CHANNEL</assignment-type>
+                    <logical-channel>{$OPTICAL_CHANNELS_INDEX}</logical-channel>
+                    <allocation>400.0</allocation>
+                  </config>
+                </assignment>
+              </logical-channel-assignments>
+            </channel>
+            <channel>
+              <index>{$OPTICAL_CHANNELS_INDEX}</index>
+              <config>
+                <index>{$OPTICAL_CHANNELS_INDEX}</index>
+                <admin-state>ENABLED</admin-state>
+                <logical-channel-type xmlns:oc-opt-types="http://openconfig.net/yang/transport-types">oc-opt-types:PROT_OTN</logical-channel-type>
+              </config>
+              <logical-channel-assignments>
+                <assignment>
+                  <index>1</index>
+                  <config>
+                    <index>1</index>
+                    <assignment-type>OPTICAL_CHANNEL</assignment-type>
+                    <optical-channel>{$OPTICAL_CHANNELS_PORT}</optical-channel>
+                    <allocation>400.0</allocation>
+                  </config>
+                </assignment>
+              </logical-channel-assignments>
+            </channel>
+          </logical-channels>
+        </terminal-device>
+        <components xmlns="http://openconfig.net/yang/platform">
+          <component>
+            <name>{$OPTICAL_CHANNELS_PORT}</name>
+            <config>
+              <name>{$OPTICAL_CHANNELS_PORT}</name>
+            </config>
+            <optical-channel xmlns="http://openconfig.net/yang/terminal-device">
+              <config>
+                <frequency>{number(device-1-port-frequency)*1000000}</frequency>
+                <?if {device-2-port-tx-power}?>
+                  <target-output-power>{number(device-2-port-tx-power)*100}</target-output-power>
+                <?end?>
+                <operational-mode>5003</operational-mode>
+              </config>
+            </optical-channel>
+          </component>
+        </components>
+      </config>
+    </device>
+  </devices>
+</config-template>

@@ -1,0 +1,135 @@
+module oc-400g-zr {
+  namespace "http://example.com/oc-400g-zr";
+  prefix oc-400g-zr;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import tailf-common {
+    prefix tailf;
+  }
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  description
+    "Bla bla...";
+
+  revision 2016-01-01 {
+    description
+      "Initial revision.";
+  }
+
+  list oc-400g-zr {
+    description "This is an RFS skeleton service";
+
+    key name;
+    leaf name {
+      tailf:info "Unique service id";
+      tailf:cli-allow-range;
+      type string;
+    }
+
+    uses ncs:service-data;
+    ncs:servicepoint oc-400g-zr-servicepoint;
+    leaf device-1 {
+      type leafref {
+        path "/ncs:devices/ncs:device/ncs:name";
+      }
+    }
+    leaf device-1-optical-port {
+      tailf:info "0/0/0/0 ~ 0/19/9/199";
+      type string {
+        pattern 0/[0-1]?[0-9]/[0-9]/[0-1]?[0-9]?[0-9];
+        }
+    }
+    leaf device-1-port-frequency {
+      type enumeration {
+            enum 191.3 ;
+            enum 191.4 ;
+            enum 191.5 ;
+            enum 191.6 ;
+            enum 191.7 ;
+            enum 191.8 ;
+            enum 191.9 ;
+            enum 192 ;
+            enum 192.1 ;
+            enum 192.2 ;
+            enum 192.3 ;
+            enum 192.4 ;
+            enum 192.5 ;
+            enum 192.6 ;
+            enum 192.7 ;
+            enum 192.8 ;
+            enum 192.9 ;
+            enum 193 ;
+            enum 193.1 ;
+            enum 193.2 ;
+            enum 193.3 ;
+            enum 193.4 ;
+            enum 193.5 ;
+            enum 193.6 ;
+            enum 193.7 ;
+            enum 193.8 ;
+            enum 193.9 ;
+            enum 194 ;
+            enum 194.1 ;
+            enum 194.2 ;
+            enum 194.3 ;
+            enum 194.4 ;
+            enum 194.5 ;
+            enum 194.6 ;
+            enum 194.7 ;
+            enum 194.8 ;
+            enum 194.9 ;
+            enum 195 ;
+            enum 195.1 ;
+            enum 195.2 ;
+            enum 195.3 ;
+            enum 195.4 ;
+            enum 195.5 ;
+            enum 195.6 ;
+            enum 195.7 ;
+            enum 195.8 ;
+            enum 195.9 ;
+            enum 196 ;
+            enum 196.1 ;
+        }
+    }
+    leaf device-1-logical-channels {
+      tailf:hidden full;
+      type int32;
+    }
+    leaf device-1-optical-channels {
+      tailf:hidden full;
+      type int32;
+    }
+    leaf device-1-port-tx-power {
+      tailf:info-html "power level (in units of 1dBm) -15 ~ 5";
+      type decimal64 {
+        fraction-digits 1;
+        }
+      description
+          "power level (in units of 1dBm) -15 ~ 5";
+    }
+    leaf device-2 {
+      type leafref {
+        path "/ncs:devices/ncs:device/ncs:name";
+      }
+    }
+    leaf device-2-optical-port {
+      tailf:info-html "0/0/0/0 ~ 0/19/9/199";
+      type string {
+        pattern 0/[0-1]?[0-9]/[0-9]/[0-1]?[0-9]?[0-9];
+        }
+    }
+    leaf device-2-port-tx-power {
+      tailf:info-html "power level (in units of 1dBm) -15 ~ 5";
+      type decimal64 {
+        fraction-digits 1;
+        }
+      description
+          "power level (in units of 1dBm -15 ~ 5)";
+    }
+  }
+}

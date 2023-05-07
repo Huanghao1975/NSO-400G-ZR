@@ -1,0 +1,12 @@
+<config xmlns="http://tail-f.com/ns/config/1.0">
+  <services xmlns="http://tail-f.com/ns/ncs">
+    <global-settings>
+      <collect-forward-diff>true</collect-forward-diff>
+    </global-settings>
+  </services>
+  <400g-zr xmlns="http://example.com/400g-zr">
+    <name>33</name>
+    <device>eth</device>
+    <dummy>127.0.0.1</dummy>
+  </400g-zr>
+</config>

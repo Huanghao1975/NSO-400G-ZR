@@ -1,0 +1,18 @@
+module ios-xr-oc-nc {
+  yang-version 1.1;
+  namespace "http://tail-f.com/ns/ned-id/ios-xr-oc-nc";
+  prefix ios-xr-oc-nc;
+
+  import tailf-common {
+    prefix tailf;
+  }
+
+  import tailf-ncs-ned {
+    prefix ned;
+  }
+
+  identity ios-xr-oc-nc {
+    tailf:abstract;
+    base ned:netconf-ned-id;
+  }
+}

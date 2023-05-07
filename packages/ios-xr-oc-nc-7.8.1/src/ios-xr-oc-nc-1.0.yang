@@ -1,0 +1,13 @@
+module ios-xr-oc-nc-1.0 {
+  yang-version 1.1;
+  namespace "http://tail-f.com/ns/ned-id/ios-xr-oc-nc-1.0";
+  prefix ios-xr-oc-nc-1.0;
+
+  import ios-xr-oc-nc {
+    prefix family;
+  }
+
+  identity ios-xr-oc-nc-1.0 {
+    base family:ios-xr-oc-nc;
+  }
+}
