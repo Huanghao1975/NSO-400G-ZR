@@ -553,13 +553,7 @@ module openconfig-platform-transceiver {
     description
       "Adding transceiver data to physical inventory";
 
-    uses port-transceiver-top {
-      when "current()/oc-platform:state/" +
-        "oc-platform:type = 'TRANSCEIVER'" {
-        description
-          "Augment is active when component is of type TRANSCEIVER";
-      }
-    }
+    uses port-transceiver-top ;
   }
 
   augment "/oc-if:interfaces/oc-if:interface/oc-if:state" {
